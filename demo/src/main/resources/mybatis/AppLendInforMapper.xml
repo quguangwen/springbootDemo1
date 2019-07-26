@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.AppLendInforMapper">
+
+<!--    <resultMap id="BCColumnMap" type="com.demo.entity.BChanelBean">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result column="app_lend_request_id" property="appLendRequestId"/>-->
+<!--        <result column="order_no" property="orderNo"/>-->
+<!--        <result column="order_time" property="orderTime"/>-->
+<!--        <result column="name" property="name"/>-->
+<!--        <result column="id_no" property="idNo"/>-->
+<!--        <result column="mobile" property="mobile"/>-->
+<!--        <result column="occupation_nature" property="occupationNature"/>-->
+<!--        <result column="product_code" property="productCode"/>-->
+<!--        <result column="sales_no" property="salesNo"/>-->
+<!--        <result column="city_code" property="cityCode"/>-->
+<!--        <result column="channel_level_one" property="channelLevelOne"/>-->
+<!--        <result column="channel_level_two" property="channelLevelTwo"/>-->
+<!--        <result column="create_time" property="createTime"/>-->
+<!--        <result column="update_time" property="updateTime"/>-->
+<!--        <result column="valid_flg" property="validFlag"/>-->
+<!--    </resultMap>-->
+
+
+    <select id="getAppRequestID" resultType="com.demo.entity.AppLendInfor" >
+        select alr.id from app_lend_request alr
+        where
+        app_customer_id =
+        (select max(lac.id) from app_customer lac,app_customer_log_in acl
+        where
+        lac.log_in_id = acl.id
+        and
+        acl.mobile = #{mobile})
+    </select>
+
+    <select id = "getProductType" parameterType="java.lang.Long" resultType="com.demo.entity.AppLendInfor">
+        select product_type from app_lend_loan_demand where app_lend_request_id =#{id}
+    </select>
+
+
+    <update id="updateAppStateByID" parameterType="com.demo.entity.AppLendInfor">
+        update app_lend_request set state_type= #{state_type} where id = #{id}
+    </update>
+
+    <select id="getMagicDataID" parameterType="java.lang.Long" resultType="com.demo.entity.AppLendInfor">
+        select magic_data_center_id from app_lend_request where id = #{id}
+    </select>
+
+    <delete id="deleteBCName" parameterType="java.lang.String">
+        delete from lend_app.app_channel_customer where id_no = #{id_no}
+    </delete>
+
+
+
+    <select id="searchDupOrderNo" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select count(*) from lend_app.app_channel_customer where order_no=#{order_no}
+    </select>
+
+    <select id="searchDupID" resultType="java.lang.Long" parameterType="java.lang.String">
+        select count(*) from lend_app.app_channel_customer where id_no=#{id_no}
+    </select>
+
+    <delete id="deleteDupID" parameterType="java.lang.String">
+        delete from lend_app.app_channel_customer where id_no=#{id_no}
+    </delete>
+
+<!--    <insert id="insertBCName" parameterType="com.demo.entity.BChanelBean">-->
+<!--        INSERT INTO lend_app.app_channel_customer-->
+<!--        (order_no, order_time, valid_flg, name, id_no, mobile, occupation_nature, product_code, sales_no, city_code, channel_level_one, channel_level_two, app_lend_request_id, create_time, update_time)-->
+<!--        VALUES-->
+<!--        (#{orderNo},#{orderTime},#{validFlag},#{name},#{idNo},#{mobile},#{occupationNature},#{productCode},#{salesNo},#{cityCode},#{channelLevelOne},#{channelLevelTwo},#{appLendRequestId},#{createTime},#{updateTime})-->
+<!--    </insert>-->
+</mapper>

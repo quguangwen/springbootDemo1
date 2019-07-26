@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.LendRequestMapper">
+    <select id="getLendRequest" parameterType="java.lang.Long" resultType="com.demo.entity.FinupLend">
+        select id, status, app_lend_request_id, lend_customer_id from lend_request where app_lend_request_id = #{appLendRequestID}
+    </select>
+
+    <select id="getLendCustomerID" parameterType="java.lang.Long" resultType="com.demo.entity.FinupLend">
+        select lend_customer_id from lend_request where app_lend_request_id = #{appLendRequestID}
+    </select>
+
+    <update id="updateStatus" parameterType="com.demo.entity.FinupLend">
+        update lend_request set status = #{status} where app_lend_request_id = #{appLendRequestID}
+    </update>
+
+    <delete id="deleteMainCard">
+        delete from lend_bank_info where lender_id = #{id};
+    </delete>
+
+    <delete id="deleteViceCard">
+        delete from lend_bank_vice_info where lend_customer_id = #{id}
+    </delete>
+
+    <update id="updateSubW" parameterType="java.lang.Long">
+        update lend_request_substatus set sub_status = "WAIT_APP_CONFIRM" where lend_request_id=#{lendRequestID}
+    </update>
+
+    <update id="updateSubR" parameterType="java.lang.Long">
+        update lend_request_substatus set sub_status = "REFUSE_SPEED" where lend_request_id=#{lendRequestID}
+    </update>
+
+    <update id="updateSubA" parameterType="java.lang.Long">
+        update lend_request_substatus set sub_status = "ACCEPT_SPEED" where lend_request_id=#{lendRequestID}
+    </update>
+
+    <update id="updateSubStatus">
+        update lend_request_substatus set sub_status = #{subStatus} where lend_request_id = #{lendRequestID}
+    </update>
+
+</mapper>

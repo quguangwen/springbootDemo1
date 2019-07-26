@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.AttachmentMapper">
+    <update id="updateAppStatus" parameterType="com.demo.entity.AttachBean">
+        update app_lend_annex_status set status = #{status}
+        where type=#{type} and
+        app_lend_request_id =
+        (select max(lar.id) from app_lend_request lar, app_customer lac , app_customer_log_in acl
+         where
+         lar.app_customer_id = lac.id
+         and
+         lac.log_in_id = acl.id
+         and
+         lac.mobile = #{mobile}
+         and
+         acl.mobile = #{mobile})
+    </update>
+</mapper>

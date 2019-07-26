@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.AppCustomerVoMapper">
+
+
+    <select id = "getCustomerBySale" parameterType="java.lang.String" resultType="com.demo.entity.AppCustomerVo">
+        select id, customer_name, mobile, id_no,sales_no from app_customer where sales_no = #{sales_no} order by id desc;
+    </select>
+
+    <select id = "getCustInforBySale" parameterType="java.util.HashMap" resultType="com.demo.entity.AppCustomerVo">
+        select lac.id, lac.customer_name, lac.mobile, lac.id_no,lac.sales_no, lalld.product_name, laalr.state_type
+        from lend_app.app_customer lac, lend_app.app_lend_loan_demand lalld, lend_app.app_lend_request laalr
+        where
+        lac.id = laalr.app_customer_id
+        and
+        laalr.id = lalld.app_lend_request_id
+
+        and lac.sales_no = #{sale_no}
+
+        <if test="mobile != null and mobile != '' ">
+            and lac.mobile = #{mobile}
+        </if>
+
+        <if test="product_name !=null and product_name != '' ">
+            and lalld.product_name = #{product_name}
+        </if>
+
+        order by lac.id desc;
+    </select>
+
+    <select id = "getTestResult" resultType="HashMap" statementType="STATEMENT">
+        select * from app_customer order by id desc limit 10;
+    </select>
+
+    <select id = "getProductList" resultType="HashMap" statementType="STATEMENT">
+        select product_type, product_name from lend_app.app_product_define ;
+    </select>
+
+    <select id = "getAttachmentList" parameterType="java.lang.String" resultType="HashMap">
+        SELECT distinct pmm.material_type, am.material_name, pmm.order_id
+        FROM lend_app.app_apply_material am, lend_app.app_product_material_mapping pmm, lend_app.app_product_define apd
+        WHERE
+        am.material_type = pmm.material_type
+        AND
+        pmm.product_id = apd.id
+        AND
+        apd.product_type = #{product_type}
+        group by am.material_name
+        order by pmm.order_id;
+    </select>
+
+</mapper>

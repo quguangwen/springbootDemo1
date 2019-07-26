@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.AppLendFinupVoMapper">
+
+
+    <select id="getLendAppFInfor" parameterType="java.lang.String" resultType="com.demo.entity.AppLendFinupVo">
+        select lr.id as id,alr.id as app_lend_request_id, lr.lend_customer_id as lend_customer_id , alr.state_type as state_type, lr.status as status   from lend_app.app_lend_request alr
+        left join
+        finup_lend.lend_request lr
+        on
+        alr.id = lr.app_lend_request_id
+        where
+        alr.id
+        in (
+        select alr.id from lend_app.app_lend_request alr, lend_app.app_customer ac
+        where
+        alr.app_customer_id = ac.id
+        and
+        mobile = #{mobile});
+    </select>
+
+</mapper>
