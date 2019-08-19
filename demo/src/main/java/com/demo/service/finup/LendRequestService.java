@@ -24,15 +24,17 @@ public class LendRequestService {
     public void updateLendRequestSub(long appLendRequestID, String subStatus){
         FinupLend finupLend = (FinupLend) lendRequestMapper.getLendRequest(appLendRequestID);
         long lendRequestID = finupLend.getId();
+        System.out.println("lendRequestID： " + lendRequestID);
         log.info("更新进件子状态: " + subStatus);
         if(subStatus.equals("WAIT_APP_CONFIRM")){
             int a = lendRequestMapper.updateSubW(lendRequestID);
-        } else if(subStatus.equals("WAIT_FIRST_SUPPLY")){
-            int a = lendRequestMapper.updateSubStatus(subStatus, lendRequestID);
+        }
+        else if(subStatus.equals("WAIT_FIRST_SUPPLY")){
+            finupLend.setSub_status("WAIT_FIRST_SUPPLY");
+            int a = lendRequestMapper.updateSubStatus(finupLend);
         } else if(subStatus.equals("WAIT_SECOND_SUPPLY")){
-            int a = lendRequestMapper.updateSubStatus(subStatus, lendRequestID);
-        } else if(subStatus.equals("SECOND_SUPPLY_MATERIAL")){
-            int a = lendRequestMapper.updateSubStatus(subStatus, lendRequestID);
+            finupLend.setSub_status("WAIT_SECOND_SUPPLY");
+            int a = lendRequestMapper.updateSubStatus(finupLend);
         }
     }
 
@@ -47,6 +49,8 @@ public class LendRequestService {
     public int updateFinupState(long appLendRequestID, String status){
         finupLend.setAppLendRequestID(appLendRequestID);
         finupLend.setStatus(status);
+        long lendRequestId = lendRequestMapper.getMaxLendID(finupLend);
+        finupLend.setId(lendRequestId);
         int a = lendRequestMapper.updateStatus(finupLend);
         return a;
     }
@@ -210,7 +214,7 @@ public class LendRequestService {
             case "FIRST_SUPPLY_MATERIAL":
                 log.info("极速贷第一次补充材料");
                 updateFinupState(appLendRequestID,"PENDING");
-                log.info("更改子状态为等待补充材料");
+                log.info("更改子状态为第一次补充材料");
                 updateLendRequestSub(appLendRequestID,"WAIT_FIRST_SUPPLY");
                 break;
             case "PB_SECOND_SUPPLY_OPTION":
@@ -245,7 +249,14 @@ public class LendRequestService {
                 log.info("更改个贷系统为补充材料");
                 updateFinupState(appLendRequestID,"WAIT_APPEND_INFORMATION");
                 break;
-
+            case "RETURN_FROZEN":
+                log.info("进件冻结");
+                updateFinupState(appLendRequestID,"APP_REJECT");
+                break;
+            case "RETURN_RECORD":
+                log.info("进件驳回");
+                updateFinupState(appLendRequestID,"APP_REJECT");
+                break;
         }
 
     }

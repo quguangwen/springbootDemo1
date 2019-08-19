@@ -34,8 +34,7 @@ public class ReadProperties {
         String fileName = "productList.properties";
         InputStream inputStream = ReadProperties.class.getClassLoader().getResourceAsStream(fileName);
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-        Properties properties = new OrderedProperties();
-
+        OrderedProperties properties = new OrderedProperties();
         try {
             properties.load(bufferedInputStream);
         } catch (IOException e) {
@@ -55,10 +54,11 @@ public class ReadProperties {
         String key = null;
 
         InputStreamReader inputStreamReader = null;
-        Properties properties = new OrderedProperties();
+        OrderedProperties properties = new OrderedProperties();
         try {
             inputStreamReader = new InputStreamReader(ReadProperties.class.getClassLoader().getResourceAsStream(fileName), "UTF-8");
             properties.load(inputStreamReader);
+            //Iterator iterator = properties.keySet().iterator();
             Set<Map.Entry<Object,Object>> entrySet = properties.entrySet();
             for(Map.Entry<Object,Object> entry : entrySet){
                 if(entry.getValue().equals(value)){
@@ -80,20 +80,19 @@ public class ReadProperties {
 
     }
 
-    public static LinkedHashMap<Object, Object> getResourceMap(String fileName) {
+    public static HashMap<Object, Object> getResourceMap(String fileName) {
         InputStreamReader inputStreamReader = null;
-        String value = null;
-        LinkedHashMap<Object, Object> linkedHashMap = new LinkedHashMap<>();
+        //String value = null;
         ArrayList arrayList = new ArrayList();
-        Properties properties = new OrderedProperties();
+        LinkedHashMap<Object, Object> hashMap = new LinkedHashMap<>();
+        OrderedProperties properties = new OrderedProperties();
         try {
             inputStreamReader = new InputStreamReader(ReadProperties.class.getClassLoader().getResourceAsStream(fileName), "UTF-8");
             properties.load(inputStreamReader);
-            Iterator iterator = properties.keySet().iterator();
-            while (iterator.hasNext()) {
-                arrayList.add(iterator.next().toString());
+            Iterator iterator = properties.stringPropertyNames().iterator();
+            while(iterator.hasNext()){
+               arrayList.add(iterator.next().toString());
             }
-
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -101,11 +100,10 @@ public class ReadProperties {
         }
 
         for(int i=0; i< arrayList.size(); i++){
-            linkedHashMap.put(arrayList.get(i),properties.getProperty(arrayList.get(i).toString()));
-
+            hashMap.put(arrayList.get(i),properties.getProperty(arrayList.get(i).toString()));
+            System.out.println(arrayList.get(i) + ":" +properties.getProperty(arrayList.get(i).toString()));
         }
-
-        return linkedHashMap;
+        return hashMap;
     }
 
 //    public static void main(String[] args) {
@@ -117,3 +115,6 @@ public class ReadProperties {
 //    }
 
 }
+
+
+

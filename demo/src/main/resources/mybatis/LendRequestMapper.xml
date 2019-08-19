@@ -10,8 +10,12 @@
     </select>
 
     <update id="updateStatus" parameterType="com.demo.entity.FinupLend">
-        update lend_request set status = #{status} where app_lend_request_id = #{appLendRequestID}
+        update lend_request set status = #{status} where id = #{id}
     </update>
+
+    <select id="getMaxLendID" parameterType="com.demo.entity.FinupLend" resultType="java.lang.Long">
+        select max(id) from lend_request where app_lend_request_id = #{app_lend_request_id}
+    </select>
 
     <delete id="deleteMainCard">
         delete from lend_bank_info where lender_id = #{id};
@@ -33,8 +37,8 @@
         update lend_request_substatus set sub_status = "ACCEPT_SPEED" where lend_request_id=#{lendRequestID}
     </update>
 
-    <update id="updateSubStatus">
-        update lend_request_substatus set sub_status = #{subStatus} where lend_request_id = #{lendRequestID}
+    <update id="updateSubStatus" parameterType="com.demo.entity.FinupLend">
+        update lend_request_substatus set sub_status = #{sub_status} where lend_request_id = #{id}
     </update>
 
 </mapper>

@@ -3,24 +3,26 @@ package com.demo.util;
 import java.util.*;
 
 public class OrderedProperties extends Properties {
-    private final LinkedHashSet<Object> keys = new LinkedHashSet<>();
+    private final LinkedHashSet<Object> linkedHashSet = new LinkedHashSet<>();
 
     public Enumeration<Object> keys() {
-        return Collections.<Object> enumeration(keys);
+        return Collections.<Object> enumeration(linkedHashSet);
     }
 
     public Object put(Object key, Object value) {
-        keys.add(key);
+        linkedHashSet.add(key);
         return super.put(key, value);
     }
 
+    @Override
     public Set<Object> keySet() {
-        return keys;
+        return linkedHashSet;
     }
 
+    @Override
     public Set<String> stringPropertyNames() {
         Set<String> set = new LinkedHashSet<>();
-        for(Object key: this.keys){
+        for(Object key: this.linkedHashSet){
             set.add((String) key);
         }
         return set;

@@ -12,7 +12,7 @@ public interface LendRequestMapper<T> {
     int deleteMainCard(long id);
     int deleteViceCard(long id);
     int updateSubW(long lendRequestID);
-    int updateSubStatus(String subStatus, long lendRequestId);
-
+    int updateSubStatus(FinupLend finupLend);
+    Long getMaxLendID(FinupLend finupLend);
 
 }

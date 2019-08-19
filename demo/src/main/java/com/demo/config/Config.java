@@ -34,7 +34,6 @@ public class Config {
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
     }
-
     @Bean
     public BChanelBean BChanelBean(){
         return new BChanelBean();

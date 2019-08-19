@@ -1,151 +1,42 @@
 package com.demo.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 public class BChanelBean {
-
+    @Getter @Setter
     private long id;
+    @Getter @Setter
     private long orderNo;
+    @Getter @Setter
     private String orderTime;
+    @Getter @Setter
     private String validFlag;
+    @Getter @Setter
     private String Name;
+    @Getter @Setter
     private String idNo;
+    @Getter @Setter
     private String mobile;
+    @Getter @Setter
     private String occupationNature;
+    @Getter @Setter
     private String productCode;
+    @Getter @Setter
     private String salesNo;
+    @Getter @Setter
     private String cityCode;
+    @Getter @Setter
     private String channelLevelOne;
+    @Getter @Setter
     private String channelLevelTwo;
+    @Getter @Setter
     private String appLendRequestId;
+    @Getter @Setter
     private String createTime;
+    @Getter @Setter
     private String updateTime;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-    public long getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(long orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public String getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(String orderTime) {
-        this.orderTime = orderTime;
-    }
-
-    public String getValidFlg() {
-        return validFlag;
-    }
-
-    public void setValidFlg(String validFlag) {
-        this.validFlag = validFlag;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getIdNo() {
-        return idNo;
-    }
-
-    public void setIdNo(String idNo) {
-        this.idNo = idNo;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getOccupationNature() {
-        return occupationNature;
-    }
-
-    public void setOccupationNature(String occupationNature) {
-        this.occupationNature = occupationNature;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
-
-    public String getSalesNo() {
-        return salesNo;
-    }
-
-    public void setSalesNo(String salesNo) {
-        this.salesNo = salesNo;
-    }
-
-    public String getCityCode() {
-        return cityCode;
-    }
-
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
-    }
-
-    public String getChannelLevelOne() {
-        return channelLevelOne;
-    }
-
-    public void setChannelLevelOne(String channelLevelOne) {
-        this.channelLevelOne = channelLevelOne;
-    }
-
-    public String getChannelLevelTwo() {
-        return channelLevelTwo;
-    }
-
-    public void setChannelLevelTwo(String channelLevelTwo) {
-        this.channelLevelTwo = channelLevelTwo;
-    }
-
-    public String getAppLendRequestId() {
-        return appLendRequestId;
-    }
-
-    public void setAppLendRequestId(String appLendRequestId) {
-        this.appLendRequestId = appLendRequestId;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
 
 }

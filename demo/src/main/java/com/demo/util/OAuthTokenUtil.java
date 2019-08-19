@@ -37,9 +37,8 @@ public class OAuthTokenUtil {
 //    }
 
     public static void main(String[] args) {
-        System.out.println( OAuthTokenUtil.getResource().getAccessTokenUri());
-        System.out.println(OAuthTokenUtil.getOAuth2AccessToken().getValue());
+//        System.out.println( OAuthTokenUtil.getResource().getAccessTokenUri());
+//        System.out.println(OAuthTokenUtil.getOAuth2AccessToken().getValue());
 
     }
-
 }
