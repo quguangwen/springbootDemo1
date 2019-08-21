@@ -30,10 +30,10 @@ public class LendRequestService {
             int a = lendRequestMapper.updateSubW(lendRequestID);
         }
         else if(subStatus.equals("WAIT_FIRST_SUPPLY")){
-            finupLend.setSub_status("WAIT_FIRST_SUPPLY");
+            finupLend.setSubStatus("WAIT_FIRST_SUPPLY");
             int a = lendRequestMapper.updateSubStatus(finupLend);
         } else if(subStatus.equals("WAIT_SECOND_SUPPLY")){
-            finupLend.setSub_status("WAIT_SECOND_SUPPLY");
+            finupLend.setSubStatus("WAIT_SECOND_SUPPLY");
             int a = lendRequestMapper.updateSubStatus(finupLend);
         }
     }
@@ -47,7 +47,7 @@ public class LendRequestService {
     }
 
     public int updateFinupState(long appLendRequestID, String status){
-        finupLend.setAppLendRequestID(appLendRequestID);
+        finupLend.setAppLendRequestId(appLendRequestID);
         finupLend.setStatus(status);
         long lendRequestId = lendRequestMapper.getMaxLendID(finupLend);
         finupLend.setId(lendRequestId);
@@ -57,7 +57,7 @@ public class LendRequestService {
 
     public int deleteMCard(long appLendRequestID){
         finupLend = lendRequestMapper.getLendCustomerID(appLendRequestID);
-        long id = finupLend.getLend_customer_id();
+        long id = finupLend.getLendCustomerId();
         log.info("删除主卡");
         int a = lendRequestMapper.deleteMainCard(id);
         return a;
@@ -65,7 +65,7 @@ public class LendRequestService {
 
     public int deleteVCard(long appLendRequestID){
         finupLend = lendRequestMapper.getLendCustomerID(appLendRequestID);
-        long id = finupLend.getLend_customer_id();
+        long id = finupLend.getLendCustomerId();
         System.out.println(id);
         log.info("删除副卡");
         int a = lendRequestMapper.deleteViceCard(id);
@@ -207,7 +207,7 @@ public class LendRequestService {
                 break;
             case "PB_SECOND_OTHER":
                 log.info("等待极速贷第一次补充材料");
-                updateFinupState(finupLend.getAppLendRequestID(),"PENDING");
+                updateFinupState(finupLend.getAppLendRequestId(),"PENDING");
                 log.info("更改子状态为等待补充材料");
                 updateLendRequestSub(appLendRequestID,"WAIT_APP_CONFIRM");
                 break;

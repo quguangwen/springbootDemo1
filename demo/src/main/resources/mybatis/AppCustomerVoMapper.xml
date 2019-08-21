@@ -2,9 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mapper.AppCustomerVoMapper">
 
+<!--        <resultMap id="AppCustomerMap" type="com.demo.entity.AppCustomerVo">-->
+<!--            <id column="id" property="id"/>-->
+<!--            <result column="app_lend_request_id" property="customerName"/>-->
+<!--            <result column="mobile" property="mobile"/>-->
+<!--            <result column="id_no" property="idNo"/>-->
+<!--            <result column="sales_no" property="salesNo"/>-->
+<!--            <result column="product_name" property="productName"/>-->
+<!--            <result column="state_type" property="stateType"/>-->
+<!--        </resultMap>-->
 
     <select id = "getCustomerBySale" parameterType="java.lang.String" resultType="com.demo.entity.AppCustomerVo">
-        select id, customer_name, mobile, id_no,sales_no from app_customer where sales_no = #{sales_no} order by id desc;
+        select id, customer_name, mobile, id_no,sales_no from app_customer where sales_no = #{salesNo} order by id desc;
     </select>
 
     <select id = "getCustInforBySale" parameterType="java.util.HashMap" resultType="com.demo.entity.AppCustomerVo">
@@ -44,7 +53,7 @@
         AND
         pmm.product_id = apd.id
         AND
-        apd.product_type = #{product_type}
+        apd.product_type = #{productType}
         group by am.material_name
         order by pmm.order_id;
     </select>

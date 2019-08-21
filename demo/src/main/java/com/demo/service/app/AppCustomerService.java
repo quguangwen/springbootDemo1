@@ -28,24 +28,6 @@ public class AppCustomerService {
     AppLendFinupVoMapper appLendFinupVoMapper;
 
 
-    public List getCustList(String saleNo) {
-        List<AppCustomerVo> list = new ArrayList();
-        log.info("查询销售绑定进件名单：");
-        list = appCustomerVOMapper.getCustomerBySale(saleNo);
-        for (int i = 0; i < list.size(); i++) {
-            appCustomerVo = list.get(i);
-            if (appCustomerVo.getMobile().contains("xy") || appCustomerVo.getId_no().equals("")) {
-                String encrypt = appCustomerVo.getMobile();
-                appCustomerVo.setMobile(AesUtils.decrypt(encrypt));
-            }
-            if (appCustomerVo.getId_no().contains("xy") || appCustomerVo.getId_no().equals("")) {
-                String encrypt1 = appCustomerVo.getId_no();
-                appCustomerVo.setId_no(AesUtils.decrypt(encrypt1));
-            }
-
-        }
-        return list;
-    }
 
     public List getCustInfor(HashMap<String, String> hashMap) {
 
@@ -54,18 +36,18 @@ public class AppCustomerService {
         list = appCustomerVOMapper.getCustInforBySale(hashMap);
         for (int i = 0; i < list.size(); i++) {
             appCustomerVo = list.get(i);
-            if (appCustomerVo.getMobile().contains("xy") ||appCustomerVo.getId_no().equals("")) {
+            if (appCustomerVo.getMobile().contains("xy") ||appCustomerVo.getIdNo().equals("")) {
                 String encrypt = appCustomerVo.getMobile();
                 appCustomerVo.setMobile(AesUtils.decrypt(encrypt));
             }
-            if (appCustomerVo.getId_no().contains("xy") || appCustomerVo.getId_no().equals("")) {
-                String encrypt1 = appCustomerVo.getId_no();
-                appCustomerVo.setId_no(AesUtils.decrypt(encrypt1));
+            if (appCustomerVo.getIdNo().contains("xy") || appCustomerVo.getIdNo().equals("")) {
+                String encrypt1 = appCustomerVo.getIdNo();
+                appCustomerVo.setIdNo(AesUtils.decrypt(encrypt1));
             }
 
-            String stateKey = appCustomerVo.getState_type();
+            String stateKey = appCustomerVo.getStateType();
             if (stateKey != null) {
-                appCustomerVo.setState_type(ReadProperties.getStateCNValue(stateKey));
+                appCustomerVo.setStateType(ReadProperties.getStateCNValue(stateKey));
             }
         }
         return list;

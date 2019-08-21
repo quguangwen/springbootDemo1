@@ -53,8 +53,7 @@ public class MybatisConfig {
      */
     @Bean
    // @Primary
-    public DynamicDataSource dataSource(@Qualifier("lendappDataSource") DataSource lendappDataSource,
-                                 @Qualifier("finupDataSource") DataSource finupDataSource){
+    public DynamicDataSource dataSource(@Qualifier("lendappDataSource") DataSource lendappDataSource, @Qualifier("finupDataSource") DataSource finupDataSource){
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DatabaseType.lend_app,lendappDataSource);
         targetDataSources.put(DatabaseType.finup_lend,finupDataSource);
@@ -64,6 +63,14 @@ public class MybatisConfig {
         return dataSource;
     }
 
+    @Bean
+    public org.apache.ibatis.session.Configuration globalConfiguration(){
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        configuration.setMapUnderscoreToCamelCase(true);
+        configuration.setUseColumnLabel(true);
+        return configuration;
+    }
+
     /***
      *
      * @param lendappDataSource
@@ -71,20 +78,13 @@ public class MybatisConfig {
      * @return
      * @throws Exception
      */
-//    @Bean
-//    public org.apache.ibatis.session.Configuration globalConfiguration(){
-//        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
-//        configuration.setMapUnderscoreToCamelCase(true);
-//        return configuration;
-//    }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("lendappDataSource") DataSource lendappDataSource,
-                                               @Qualifier("finupDataSource") DataSource finupDataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(DataSource lendappDataSource, DataSource finupDataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(this.dataSource(lendappDataSource,finupDataSource)); //指定数据源
         sqlSessionFactoryBean.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));
-//        sqlSessionFactoryBean.setConfiguration(globalConfiguration());
+        sqlSessionFactoryBean.setConfiguration(globalConfiguration());
         //下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try{

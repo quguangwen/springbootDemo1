@@ -14,7 +14,7 @@
     </update>
 
     <select id="getMaxLendID" parameterType="com.demo.entity.FinupLend" resultType="java.lang.Long">
-        select max(id) from lend_request where app_lend_request_id = #{app_lend_request_id}
+        select max(id) from lend_request where app_lend_request_id = #{appLendRequestId}
     </select>
 
     <delete id="deleteMainCard">

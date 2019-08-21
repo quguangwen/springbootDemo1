@@ -4,7 +4,12 @@
 
 
     <select id="getLendAppFInfor" parameterType="java.lang.String" resultType="com.demo.entity.AppLendFinupVo">
-        select lr.id as id,alr.id as app_lend_request_id, lr.lend_customer_id as lend_customer_id , alr.state_type as state_type, lr.status as status   from lend_app.app_lend_request alr
+
+        select lr.id as id,alr.id as app_lend_request_id, ac.log_in_id as log_in_id,ac.id as app_customer_id,lr.lend_customer_id as lend_customer_id , alr.state_type as state_type, lr.status as status   from  lend_app.app_customer ac
+        left join
+        lend_app.app_lend_request alr
+        on
+        ac.id = alr.app_customer_id
         left join
         finup_lend.lend_request lr
         on

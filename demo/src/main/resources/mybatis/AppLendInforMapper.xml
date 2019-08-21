@@ -39,7 +39,7 @@
 
 
     <update id="updateAppStateByID" parameterType="com.demo.entity.AppLendInfor">
-        update app_lend_request set state_type= #{state_type} where id = #{id}
+        update app_lend_request set state_type= #{stateType} where id = #{id}
     </update>
 
     <select id="getMagicDataID" parameterType="java.lang.Long" resultType="com.demo.entity.AppLendInfor">
@@ -47,21 +47,21 @@
     </select>
 
     <delete id="deleteBCName" parameterType="java.lang.String">
-        delete from lend_app.app_channel_customer where id_no = #{id_no}
+        delete from lend_app.app_channel_customer where id_no = #{idNo}
     </delete>
 
 
 
     <select id="searchDupOrderNo" resultType="java.lang.Long" parameterType="java.lang.Long">
-        select count(*) from lend_app.app_channel_customer where order_no=#{order_no}
+        select count(*) from lend_app.app_channel_customer where order_no=#{orderNo}
     </select>
 
     <select id="searchDupID" resultType="java.lang.Long" parameterType="java.lang.String">
-        select count(*) from lend_app.app_channel_customer where id_no=#{id_no}
+        select count(*) from lend_app.app_channel_customer where id_no=#{idNo}
     </select>
 
     <delete id="deleteDupID" parameterType="java.lang.String">
-        delete from lend_app.app_channel_customer where id_no=#{id_no}
+        delete from lend_app.app_channel_customer where id_no=#{idNo}
     </delete>
 
 <!--    <insert id="insertBCName" parameterType="com.demo.entity.BChanelBean">-->

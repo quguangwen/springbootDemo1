@@ -75,25 +75,25 @@ public class UpdateLendAppStatus {
         long id = getAppRequestID(mobile);
         System.out.println("applendrequest :" + id);
 
-        System.out.println("State_type:*********** " + appLendInfor.getState_type());
+        System.out.println("State_type:*********** " + appLendInfor.getStateType());
 
         if(isSpecialProduct(mobile)) {
             if (state_type.equals("CONFIRM_CONTRACT_SUCCESS")) {
-                appLendInfor.setState_type("SIGN_AUDITING");
-                System.out.println(appLendInfor.getState_type());
+                appLendInfor.setStateType("SIGN_AUDITING");
+                System.out.println(appLendInfor.getStateType());
             }
         }
 
         if(state_type.equals("MAIN_CARD_AUTHENTICATION") || state_type.equals("VICE_CARD_AUTHENTICATION")){
-            appLendInfor.setState_type("APPROVED");
+            appLendInfor.setStateType("APPROVED");
         } else{
-            appLendInfor.setState_type(state_type);
+            appLendInfor.setStateType(state_type);
         }
 
 
         appLendInfor.setId(id);
         appLendInfor.setMobile(encryptMobile);
-        System.out.println("***********" + appLendInfor.getState_type());
+        System.out.println("***********" + appLendInfor.getStateType());
         int a = appLendInforMapper.updateAppStateByID(appLendInfor);
         return a;
     }
@@ -129,7 +129,7 @@ public class UpdateLendAppStatus {
         long appid = getAppRequestID(mobile);
         System.out.println("appid: " + appid);
         appLendInfor = appLendInforMapper.getProductType(appid);
-        String product_type = appLendInfor.getProduct_type();
+        String product_type = appLendInfor.getProductType();
         if(!product_type.equals("") || !product_type.equals(null)){
             ArrayList arrayList = ReadProperties.getProductList();
             for(int i=0;i<arrayList.size();i++){
@@ -145,7 +145,7 @@ public class UpdateLendAppStatus {
     public String getMagicDataID(String mobile){
         long appid = getAppRequestID(mobile);
         appLendInfor = appLendInforMapper.getMagicDataID(appid);
-        String magicID = appLendInfor.getMagic_data_center_id();
+        String magicID = appLendInfor.getMagicDataCenterId();
         return magicID;
     }
 

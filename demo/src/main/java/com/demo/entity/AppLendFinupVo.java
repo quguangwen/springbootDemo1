@@ -1,20 +1,24 @@
 package com.demo.entity;
 
-import lombok.Getter;
-import lombok.Setter;
 
+import lombok.Data;
+
+@Data
 public class AppLendFinupVo {
 
-    @Getter @Setter
+    private long logInId;
+
+    private long appCustomerId;
+
     private long id;
-    @Getter @Setter
+
     private String status;
-    @Getter @Setter
-    private long app_lend_request_id ;
-    @Getter @Setter
-    private String state_type;
-    @Getter @Setter
-    private long lend_customer_id;
+
+    private long appLendRequestId ;
+
+    private String stateType;
+
+    private long lendCustomerId;
 
 
 }

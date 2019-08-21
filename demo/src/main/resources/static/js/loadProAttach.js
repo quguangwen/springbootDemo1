@@ -4,7 +4,6 @@ var loadProAttach = function(){
         form.on('select(product_name)',function(data){
             $("#type").empty();
             form.render('select');
-            console.log(data.value);
             var dataTest = {"product_type":data.value}
             $.ajax({
                 type: "POST",

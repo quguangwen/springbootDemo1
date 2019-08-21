@@ -9,16 +9,16 @@ public class AppCustomerVo {
 
     private long id;
 
-    private String customer_name;
+    private String customerName;
 
     private String mobile;
 
-    private String id_no;
+    private String idNo;
 
-    private String sales_no;
+    private String salesNo;
 
-    private String product_name;
+    private String productName;
 
-    private String state_type;
+    private String stateType;
 
 }

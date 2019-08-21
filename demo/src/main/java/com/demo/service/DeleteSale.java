@@ -22,7 +22,7 @@ public class DeleteSale {
         if(saleno.equals("")){
             a = saleMapper.deleteAllDevice();
         } else {
-            sale.setSaleno(saleno);
+            sale.setSaleNo(saleno);
             a = saleMapper.deleteSaleByNO(sale);
         }
         return a;
