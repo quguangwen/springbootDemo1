@@ -20,5 +20,7 @@ public class AppLendFinupVo {
 
     private long lendCustomerId;
 
+    private String subStatus;
+
 
 }

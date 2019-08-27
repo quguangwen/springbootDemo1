@@ -9,6 +9,12 @@
 </head>
 <body>
 
+<script type="text/javascript">
+    var date = new Date();
+    console.log(date.toLocaleString());
+    var version =date.toLocaleString()
+</script>
+
 <script type="text/javascript", src="../static/js/showAppFinupTable.js"></script>
 <script type="text/javascript", src="../static/js/showTable.js"></script>
 <script type="text/javascript", src="../static/js/sub.js"></script>
@@ -232,10 +238,45 @@
 
                     <div class="layui-inline">
                         <label class="layui-form-label">请输入:</label>
-                        <div class="layui-input-block">
+                        <div class="layui-input-inline">
                             <input type="text" name="sale_no11" placeholder="请输入工号" autocomplete="off" class="layui-input" style="width:200px">
                         </div>
                     </div>
+                    <div>
+                        <br>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">一级渠道：</label>
+                        <div class="layui-input-block" style="width:200px">
+                            <input type="text" name="channelLevelOne" placeholder="默认是百川" autocomplete="off" class="layui-input" style="width:200px">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">二级渠道：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="channelLevelTwo" placeholder="默认是百川" autocomplete="off" class="layui-input" style="width:200px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">选择门店:</label>
+                        <div class="layui-input-inline">
+                            <select id="shopName" name="shopName" lay-filter="occupation_nature">
+                                <option value ="">请选择推单门店</option>
+                                <option value ="yunling">云岭大道门店</option>
+                                <option value ="beishi">北京十里河</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">推单方式：</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="flag" value="duplicate" title="重复推单">
+                            <input type="radio" name="flag" value="generate"  title="新推记录" checked>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">

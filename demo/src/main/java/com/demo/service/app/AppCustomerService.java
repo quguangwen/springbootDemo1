@@ -58,6 +58,7 @@ public class AppCustomerService {
         log.info("根据手机号查询进件信息：");
         String encryptMobile = AesUtils.encrypt(mobile);
         list = appLendFinupVoMapper.getLendAppFInfor(encryptMobile);
+        System.out.println(list);
         return list;
     }
 

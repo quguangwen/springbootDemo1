@@ -7,7 +7,6 @@ var showAppFinupTable = function(buttonName, formName, url){
                 dataType: "json",
                 success: function(data){
                      var result = data.result;
-                     console.log(result)
                       layui.use('table', function(){
                         var table = layui.table;
                         table.render({
@@ -21,8 +20,9 @@ var showAppFinupTable = function(buttonName, formName, url){
                                   ,{field:'logInId', width:120, title: 'APP_UUID'}
                                   ,{field:'appCustomerId', width:120, title: 'APP客户ID'}
                                   ,{field:'lendCustomerId', width:140, title: '系统客户ID'}
-                                  ,{field:'stateType', width:'30%', title: 'APP状态'}
-                                  ,{field:'status', title: '个贷状态'}
+                                  ,{field:'stateType', width:180, title: 'APP状态'}
+                                  ,{field:'status', width:180, title: '个贷状态'}
+                                  ,{field:'subStatus', title: '系统子状态'}
 
                                 ]]
                                 });

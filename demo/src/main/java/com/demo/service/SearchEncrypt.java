@@ -13,7 +13,7 @@ public class SearchEncrypt {
     public ArrayList getEncrpt(ArrayList arrayList){
         ArrayList encrptList = new ArrayList();
         for(int i=0; i< arrayList.size(); i++){
-            String s = AesUtils.encrypt((String) arrayList.get(i));
+            String s = AesUtils.encrypt(arrayList.get(i).toString().trim());
             encrptList.add(s);
         }
         return encrptList;
@@ -22,7 +22,7 @@ public class SearchEncrypt {
     public ArrayList getDecrpt(ArrayList arrayList){
         ArrayList decrypt = new ArrayList();
         for(int i=0; i<arrayList.size(); i++){
-            String s = AesUtils.decrypt((String)arrayList.get(i));
+            String s = AesUtils.decrypt(arrayList.get(i).toString().trim());
             decrypt.add(s);
         }
         return decrypt;
@@ -32,9 +32,9 @@ public class SearchEncrypt {
 
         String s = "" ;
         if(test.startsWith("xy")){
-            s = AesUtils.decrypt(test);
+            s = AesUtils.decrypt(test.trim());
         } else {
-            s = AesUtils.encrypt(test);
+            s = AesUtils.encrypt(test.trim());
         }
         return s;
     }

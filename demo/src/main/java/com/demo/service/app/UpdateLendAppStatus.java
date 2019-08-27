@@ -41,7 +41,6 @@ public class UpdateLendAppStatus {
     AppLendInforMapper appLendInforMapper;
     @Autowired
     RestTemplate restTemplate;
-
     @Autowired
     BChanelBean bChanelBean;
 
@@ -54,6 +53,7 @@ public class UpdateLendAppStatus {
         attachBean.setType(type);
         attachBean.setMobile(encryptMobile);
         attachBean.setStatus(status);
+        System.out.println();
        // DatabaseContextHolder.setDatabaseType(DatabaseType.lend_app);
         int a = attachmentMapper.updateAppStatus(attachBean);
         return a;
@@ -142,11 +142,16 @@ public class UpdateLendAppStatus {
         return flag;
     }
 
-    public String getMagicDataID(String mobile){
+    public String getMagicDataID(String mobile) throws Exception{
         long appid = getAppRequestID(mobile);
-        appLendInfor = appLendInforMapper.getMagicDataID(appid);
-        String magicID = appLendInfor.getMagicDataCenterId();
-        return magicID;
+        try{
+            appLendInfor = appLendInforMapper.getMagicDataID(appid);
+            String magicID = appLendInfor.getMagicDataCenterId();
+            System.out.println("magicID:" + magicID);
+            return magicID;
+        } catch (Exception e){
+            throw new Exception("MAGIC_DATA_ID为空，请先生成ID再查询",e);
+        }
     }
 
     public String client(String path1, String applyNO, String corpID, String durex ){
@@ -157,7 +162,16 @@ public class UpdateLendAppStatus {
     }
 
 
-    public String bcPush(String id_no,String product_code, String occupation_nature, String sale_no){
+
+    //116.465176,39.871712 北京十里河, 100.255924,25.59514 大理云岭 坐标
+    public String bcPush(String id_no,
+                         String product_code,
+                         String occupation_nature,
+                         String sale_no,
+                         String channelLevelOne,
+                         String channelLevelTwo,
+                         String flagGenerate,
+                         String shopName){
         boolean flag = true;
         long order_no =0;
         while(flag){
@@ -169,14 +183,23 @@ public class UpdateLendAppStatus {
         }
 
         long idCheck = appLendInforMapper.searchDupID(AesUtils.encrypt(id_no));
-        if(idCheck != 0){
+        if(idCheck != 0 && flagGenerate.equals("generate")){
             appLendInforMapper.deleteDupID(AesUtils.encrypt(id_no));
         }
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
         String url = "http://finup-lend-app-server.lendapp.beta/api/baichuan/push";
-        bChanelBean.setChannelLevelOne("BC");
-        bChanelBean.setChannelLevelTwo("BCAPP");
+        if (channelLevelOne.equals(null) || channelLevelOne.equals("")){
+            bChanelBean.setChannelLevelOne("BC");
+        } else {
+            bChanelBean.setChannelLevelOne(channelLevelOne);
+        }
+        if (channelLevelTwo.equals(null) || channelLevelTwo.equals("")){
+            bChanelBean.setChannelLevelTwo("BCAPP");
+        } else {
+            bChanelBean.setChannelLevelTwo(channelLevelTwo);
+        }
+
         bChanelBean.setCityCode("北京市");
         bChanelBean.setIdNo(id_no);
         bChanelBean.setMobile("18618439839");
@@ -185,6 +208,13 @@ public class UpdateLendAppStatus {
         bChanelBean.setOrderNo(order_no);
         bChanelBean.setOrderTime(dateFormat.format(date));
         bChanelBean.setProductCode(product_code);
+        if(shopName.equals("yunling")){
+            bChanelBean.setLongitude("100.255924");
+            bChanelBean.setLatitude("25.59514");
+        } else {
+            bChanelBean.setLongitude("116.465176");
+            bChanelBean.setLatitude("39.871712");
+        }
         if(sale_no.equals(null) || sale_no.equals("")){
             bChanelBean.setSalesNo("BC0000000023");
         }else{
