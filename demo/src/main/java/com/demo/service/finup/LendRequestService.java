@@ -49,10 +49,17 @@ public class LendRequestService {
     public int updateFinupState(long appLendRequestID, String status){
         finupLend.setAppLendRequestId(appLendRequestID);
         finupLend.setStatus(status);
-        long lendRequestId = lendRequestMapper.getMaxLendID(finupLend);
-        finupLend.setId(lendRequestId);
-        int a = lendRequestMapper.updateStatus(finupLend);
-        return a;
+        Long lendRequestId = lendRequestMapper.getMaxLendID(finupLend);
+        if(lendRequestId == null) {
+            return 1;
+        } else {
+            System.out.println(lendRequestId.longValue());
+            finupLend.setId(lendRequestId.longValue());
+            int a = lendRequestMapper.updateStatus(finupLend);
+            return a;
+        }
+
+
     }
 
     public int deleteMCard(long appLendRequestID){

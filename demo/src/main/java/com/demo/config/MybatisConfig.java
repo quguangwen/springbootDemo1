@@ -19,8 +19,10 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
-  * springboot集成mybatis的基本入口 1）创建数据源(如果采用的是默认的tomcat-jdbc数据源，则不需要)
-  * 2）创建SqlSessionFactory 3）配置事务管理器，除非需要使用事务，否则不用配置
+  * springboot集成mybatis的基本入口
+  * （1）创建数据源(如果采用的是默认的tomcat-jdbc数据源，则不需要)
+  * （2）创建SqlSessionFactory
+  * （3）配置事务管理器，除非需要使用事务，否则不用配置
   */
 @Slf4j
 @Configuration
@@ -97,9 +99,9 @@ public class MybatisConfig {
     }
 
 
-    @Bean
-    public DataSourceTransactionManager  transactionManager(DynamicDataSource dataSource){
-        return new DataSourceTransactionManager(dataSource);
-    }
+//    @Bean
+//    public DataSourceTransactionManager  transactionManager(DynamicDataSource dataSource){
+//        return new DataSourceTransactionManager(dataSource);
+//    }
 
 }

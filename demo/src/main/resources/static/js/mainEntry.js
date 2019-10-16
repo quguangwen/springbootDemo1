@@ -1,10 +1,10 @@
 
-layui.use('element', function(){})
+
 layui.use('form', function(){
     var form =layui.form;
 })
 
-'use strict';
+
 $(function(){
 
     loadProductList();

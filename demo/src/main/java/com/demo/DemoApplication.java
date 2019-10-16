@@ -17,6 +17,6 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-//		List<Long> list = Arrays.asList(1l,2l,3l);
+
 	}
 }

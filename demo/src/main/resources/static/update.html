@@ -1,0 +1,330 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>修改进件状态</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <script type="text/javascript" src="../static/layui/layui.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+
+<script type="text/javascript", src="../static/js/showAppFinupTable.js"></script>
+<script type="text/javascript", src="../static/js/showTable.js"></script>
+<script type="text/javascript", src="../static/js/sub.js"></script>
+<script type="text/javascript", src="../static/js/loadProductList.js"></script>
+<script type="text/javascript", src="../static/js/loadProduct1.js"></script>
+<script type="text/javascript", src="../static/js/loadProductSec.js"></script>
+<script type="text/javascript", src="../static/js/loadProAttach.js"></script>
+<script type="text/javascript", src="../static/js/loadSelectAttachmentState.js"></script>
+<script type="text/javascript", src="../static/js/loadSelectAppState.js"></script>
+<script type="text/javascript", src="../static/js/mainEntry.js"></script>
+
+<div class="layui-collapse">
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">附件状态修改</h2>
+        <div class="layui-colla-content layui-show">
+            <!--<form id="attachform" class="layui-form" action="/updateAsset" method="get">-->
+            <form id="formAttachment" class="layui-form" onsubmit="return false" action="##" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">输入手机号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="mobile" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input" style="width:200px">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">进件附件项:</label>
+                        <div class="layui-input-block" style="width:200px">
+                            <select id="product" name="product" lay-verify="required" lay-filter="product_name">
+                                <option value ="">请选择产品</option>
+                            </select>
+                            <br>
+                            <select id="type" name="type" lay-verify="required" lay-filter="app_type">
+                                <option value ="">请选择附件项</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">附件项状态:</label>
+                    <div class="layui-input-block" style="width:200px">
+                        <select id="status" name="status" lay-verify="required" lay-filter="app_status">
+                            <option value ="">请选择状态</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="attachbutton" class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">进件状态修改</h2>
+        <div class="layui-colla-content layui-show">
+            <!--<form id="formAppStatus" class="layui-form" action="/updateLendApp" method="get">-->
+            <form id="formAppStatus" class="layui-form" onsubmit="return false" action="##" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">输入手机号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="mobile"  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input" style="width:200px">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">进件状态:</label>
+                    <div class="layui-input-block" style="width:200px">
+                        <select id="appState" name="state_type" lay-verify="required" lay-filter="app_state">
+                            <option value ="">请选择状态</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="appstatus" class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">清空钢铁侠设备</h2>
+        <div class="layui-colla-content layui-show">
+            <!--<form class="layui-form" action="/clearDeviceToken" method="POST">-->
+            <form id="formDevice" onsubmit="return false" action="##" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">清空设备:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="saleID" placeholder="请输入销售工号或者不输入" autocomplete="off" class="layui-input" style="width:200px">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="device" class="layui-btn layui-btn-normal" lay-submit>立即提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">查询身份证手机号加密</h2>
+        <div class="layui-colla-content layui-show">
+            <form id="mcform"  onsubmit="return false" action="##" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">请输入:</label>
+                    <div class="layui-input-block">
+                        <input id ="mcArray" type="text" name="array" placeholder="请输入手机号或者身份证号" autocomplete="off" class="layui-input" style="width:200px">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="submc" class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">查询APP进件信息</h2>
+        <div class="layui-colla-content layui-show">
+            <!--<form class="layui-form" action="/clearDeviceToken" method="POST">-->
+            <form id="appForm" onsubmit="return false" action="##" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">请输入:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="mobile" placeholder="请输入手机号" autocomplete="off" class="layui-input" style="width:200px">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="appSub" class="layui-btn layui-btn-normal" lay-submit>立即提交</button>
+                    </div>
+                </div>
+
+                <div style="margin: 10px 50px 50px 50px">
+                    <table class="layui-hide" id="appFinupTable"></table>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">查询抓取项信息</h2>
+        <div class="layui-colla-content layui-show">
+            <!--<form id="formAppStatus" class="layui-form" action="/updateLendApp" method="get">-->
+            <form id="formMagic" class="layui-form" action="/selectSocial" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">输入手机号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="mobile"  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input" style="width:200px">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">抓取选项:</label>
+                    <div class="layui-input-block" style="width:200px">
+                        <select name="path" lay-verify="required">
+                            <option value ="">请选择抓取项</option>
+                            <option value ="selectInsuranceIntegrate">社保</option>
+                            <option value ="selectMobileIntegrate">运营商</option>
+                            <option value="selectAlipayIntegrate">支付宝</option>
+                            <option value="selectChsiIntegrate">学信网</option>
+                            <option value="selectTaoBaoIntegrate">淘宝</option>
+                            <option value="selectFundIntegrate">公积金</option>
+                            <option value="selectCreditReportIntegrate">征信</option>
+                            <option value="selectDebitCardIntegrat">银行卡</option>
+                            <option value="selectJDIntegrate">京东</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="magicSub" class="layui-btn layui-btn-normal" lay-submit>立即提交</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">推送百川名单</h2>
+        <div class="layui-colla-content layui-show">
+            <form id="bcChanel" class="layui-form" onsubmit="return false" action="##" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">身份证号:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="id_no" lay-verify="required" placeholder="请输入身份证" autocomplete="off" class="layui-input" style="width:200px">
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">产品:</label>
+                        <div class="layui-input-inline">
+                            <select id="product_code" name="product_name" lay-filter="product_name">
+                                <option value ="">请选择产品</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">产品:</label>
+                        <div class="layui-input-inline">
+                            <select id="occupation_nature" name="occupation_nature" lay-filter="occupation_nature">
+                                <option value ="">请选择职业类型</option>
+                                <option value ="SALARY">薪</option>
+                                <option value ="BUSINESS">商</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">请输入:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="sale_no11" placeholder="请输入工号" autocomplete="off" class="layui-input" style="width:200px">
+                        </div>
+                    </div>
+                    <div>
+                        <br>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">一级渠道：</label>
+                        <div class="layui-input-block" style="width:200px">
+                            <input type="text" name="channelLevelOne" placeholder="默认是百川" autocomplete="off" class="layui-input" style="width:200px">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">二级渠道：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="channelLevelTwo" placeholder="默认是百川" autocomplete="off" class="layui-input" style="width:200px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">选择门店:</label>
+                        <div class="layui-input-inline">
+                            <select id="shopName" name="shopName" lay-filter="occupation_nature">
+                                <option value ="">请选择推单门店</option>
+                                <option value ="yunling">云岭大道门店</option>
+                                <option value ="beishi">北京十里河</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">推单方式：</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="flag" value="duplicate" title="重复推单">
+                            <input type="radio" name="flag" value="generate"  title="新推记录" checked>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="bcsub" class="layui-btn layui-btn-normal" lay-submit>立即提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">查询销售绑定进件</h2>
+        <div class="layui-colla-content layui-show">
+            <!--<form class="layui-form" action="/clearDeviceToken" method="POST">-->
+            <form id="formuser" class="layui-form" onsubmit="return false" action="##" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">销售工号:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="saleno" lay-verify="required" placeholder="请输入销售号" autocomplete="off" class="layui-input" style="width:200px">
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">手机号:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="mobile" placeholder="请输入手机号" autocomplete="off" class="layui-input" style="width:200px">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">产品:</label>
+                        <div class="layui-input-inline">
+                            <select id="pro" name="product_name" lay-filter="product_name">
+                                <option value ="">请选择产品</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="salesub" class="layui-btn layui-btn-normal" lay-submit>立即提交</button>
+                    </div>
+                </div>
+            </form>
+            <div style="margin: 10px 50px 50px 50px">
+                <table class="layui-hide" id="customertable"></table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+
+
+

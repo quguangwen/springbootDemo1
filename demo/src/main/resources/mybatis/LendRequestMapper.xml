@@ -38,7 +38,7 @@
     </update>
 
     <update id="updateSubStatus" parameterType="com.demo.entity.FinupLend">
-        update lend_request_substatus set sub_status = #{sub_status} where lend_request_id = #{id}
+        update lend_request_substatus set sub_status = #{subStatus} where lend_request_id = #{id}
     </update>
 
 </mapper>
